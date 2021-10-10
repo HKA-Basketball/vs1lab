@@ -7,7 +7,6 @@
 */
 
 /* Global styling */
-
 html {
   box-sizing: border-box;
 }
@@ -15,14 +14,11 @@ html {
 * {
   margin: 0;
   padding: 0;
-
   /* This approach prevents issues with 3rd party content-box components */
   box-sizing: inherit;
 }
 
-
 /* Variables (example: see declaration for "a" below) */
-
 :root {
   --link-color: #00B7FF;
   --background-color: #efefef;
@@ -30,9 +26,7 @@ html {
   --gray-color: #666;
 }
 
-
 /* HTML element styles */
-
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   display: flex;
@@ -44,13 +38,26 @@ a {
   color: var(--link-color);
 }
 
-/* ### TODO ### Styles for other HTML elements */
+/* Styles for other HTML elements */
+h2 {
+  line-height: 50px;
+}
 
-/* ... your code here ... */
+ul.discovery__results li {
+  list-style-type: none;
+  background-color: rgb(239, 239, 239);
+  color: #00B7FF;
+  padding: 10px;
+  margin: 15px 0px;
+  border: 1px solid rgb(138, 138, 138);
+}
 
+label {
+  line-height: 24px;
+  color:rgb(80, 80, 80);
+}
 
 /* Grid styles (no changes required) */
-
 .row {
   width: 100%;
   display: flex;
@@ -106,32 +113,137 @@ a {
   width: calc(100% - 1rem);
 }
 
+/* Styles for Header Component */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
 
-/* ### TODO ### Styles for Header Component */
+  padding: 25px;
 
-/* ... your code here ... */
+  background-color: #efefef;
+  border-bottom: 1px solid #cdcdcd;
+}
 
+.header__image {
+  width: 50px;
+}
 
-/* ### TODO ### Styles for Main Component */
+/* Styles for Main Component */
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 50px;
+}
 
-/* ... your code here ... */
+/* Styles for Tagging component */
+.tagging {
+  padding: 0px 15px;
+  
+}
 
+legend {
+  padding: 0 5px;
+}
 
-/* ### TODO ### Styles for Tagging component */
+fieldset {
+  border: 1px solid lightgray;
+  border-radius: 2px;
+}
 
-/* ... your code here ... */
+fieldset {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
+  padding: 10px;
+}
 
-/* ### TODO ### Styles for Discovery component */
+input {
+  border: 1px solid darkgray;
+  height: 32px;
+  width: 200px;
+  border-radius: 2px;
+  padding-left: 5px;
+  margin-bottom: 10px;
+}
 
-/* ... your code here ... */
+input:read-only {
+  background-color: rgba(211, 211, 211, 0.521);
+}
 
+button {
+  border-style: solid;
+  border-color: lightgray;
+  border-width: 1px;
+  border-radius: 2px;
+  padding: 2px;
+  height: 32px;
+  width: 200px;
+}
 
-/* ### TODO ### Styles for Footer Component */
+/*Styles for Discovery component */
+.discovery {
+  flex-grow: 3;
+  padding: 0px 15px;
 
-/* ... your code here ... */
+}
 
+.discovery fieldset {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-/* ### TODO ### Media Queries */
+  padding: 10px;
+}
 
-/* ... your code here ... */
+.discovery__wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.discovery__taglist{
+  margin: 10px 10px 0px 0px ;
+}
+
+.discovery__map {
+  flex-grow: 2;
+  margin: 25px;
+
+}
+
+.discovery__map span {
+  color: gray;
+}
+
+/*Styles for Footer Component */
+
+.footer {
+  display: flex;
+  justify-content: flex-start;
+  padding: 25px;
+  background-color: #efefef;
+  border-top: 1px solid #cdcdcd;
+  font-weight: bold;
+  /*TODO: Fix me to bottom of website, pls*/
+}
+
+/* Media Queries */
+@media only screen and (orientation: portrait) {
+
+  .main, .discovery__wrapper {
+    flex-direction: column;
+  }
+
+  #mapView {
+    width: 100%;
+  }
+}
+
+@media only print {
+  /* TODO */
+}
