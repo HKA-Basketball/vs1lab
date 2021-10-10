@@ -229,7 +229,8 @@ button {
   background-color: #efefef;
   border-top: 1px solid #cdcdcd;
   font-weight: bold;
-  /*TODO: Fix me to bottom of website, pls*/
+  margin-top:auto;
+  min-height:100px;
 }
 
 /* Media Queries */
