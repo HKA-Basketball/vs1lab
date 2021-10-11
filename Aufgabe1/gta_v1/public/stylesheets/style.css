@@ -133,7 +133,7 @@ label {
 /* Styles for Main Component */
 .main {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: stretch;
   padding: 50px;
 }
@@ -188,6 +188,7 @@ button {
 .discovery {
   flex-grow: 3;
   padding: 0px 15px;
+  max-width: 800px;
 
 }
 
