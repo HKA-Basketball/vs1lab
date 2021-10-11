@@ -43,15 +43,6 @@ h2 {
   line-height: 50px;
 }
 
-ul.discovery__results li {
-  list-style-type: none;
-  background-color: rgb(239, 239, 239);
-  color: #00B7FF;
-  padding: 10px;
-  margin: 15px 0px;
-  border: 1px solid rgb(138, 138, 138);
-}
-
 label {
   line-height: 24px;
   color:rgb(80, 80, 80);
@@ -122,8 +113,8 @@ label {
 
   padding: 25px;
 
-  background-color: #efefef;
-  border-bottom: 1px solid #cdcdcd;
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .header__image {
@@ -132,40 +123,37 @@ label {
 
 /* Styles for Main Component */
 .main {
-  display: flex;
-  justify-content: flex-start;
-  align-items: stretch;
   padding: 50px;
 }
 
 /* Styles for Tagging component */
 .tagging {
   padding: 0px 15px;
-  
+  max-width: 300px;
 }
 
 legend {
   padding: 0 5px;
+  margin: 0 -5px;
 }
 
 fieldset {
-  border: 1px solid lightgray;
+  border: 1px solid var(--border-color);
   border-radius: 2px;
-}
-
-fieldset {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
   padding: 10px;
 }
 
-input {
-  border: 1px solid darkgray;
+button, input {
+  display: block;
+  
   height: 32px;
   width: 200px;
+
+  border: 1px solid var(--border-color);
   border-radius: 2px;
+}
+
+input {
   padding-left: 5px;
   margin-bottom: 10px;
 }
@@ -174,37 +162,18 @@ input:read-only {
   background-color: rgba(211, 211, 211, 0.521);
 }
 
-button {
-  border-style: solid;
-  border-color: lightgray;
-  border-width: 1px;
-  border-radius: 2px;
-  padding: 2px;
-  height: 32px;
-  width: 200px;
-}
-
 /*Styles for Discovery component */
 .discovery {
-  flex-grow: 3;
   padding: 0px 15px;
-  max-width: 800px;
-
 }
 
-.discovery fieldset {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
+.discovery__results li {
+  list-style-type: none;
+  background-color: var(--background-color);
+  color: var(--link-color);
   padding: 10px;
-}
-
-.discovery__wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
+  margin: 15px 0px;
+  border: 1px solid var(--border-color);
 }
 
 .discovery__taglist{
@@ -215,6 +184,10 @@ button {
   flex-grow: 2;
   margin: 25px;
 
+}
+
+#mapView {
+  width: 100%;
 }
 
 .discovery__map span {
@@ -235,13 +208,14 @@ button {
 }
 
 /* Media Queries */
-@media only screen and (orientation: portrait) {
+@media only screen and (max-width: 1000px) {
 
-  .main, .discovery__wrapper {
+  .row {
     flex-direction: column;
   }
 
-  #mapView {
+  .col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+  .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
     width: 100%;
   }
 }
