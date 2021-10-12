@@ -7,6 +7,7 @@
 */
 
 /* Global styling */
+
 html {
   box-sizing: border-box;
 }
@@ -14,11 +15,14 @@ html {
 * {
   margin: 0;
   padding: 0;
+
   /* This approach prevents issues with 3rd party content-box components */
   box-sizing: inherit;
 }
 
+
 /* Variables (example: see declaration for "a" below) */
+
 :root {
   --link-color: #00B7FF;
   --background-color: #efefef;
@@ -26,7 +30,9 @@ html {
   --gray-color: #666;
 }
 
+
 /* HTML element styles */
+
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   display: flex;
@@ -39,16 +45,49 @@ a {
 }
 
 /* Styles for other HTML elements */
+
 h2 {
   line-height: 50px;
 }
 
+fieldset {
+  padding: 15px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+}
+
+legend {
+  padding: 0 5px;
+  margin: 0 -5px;
+}
+
 label {
   line-height: 24px;
-  color:rgb(80, 80, 80);
+  color: var(--gray-color);
+}
+
+button, input {
+  display: block;
+
+  height: 30px;
+  width: 200px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+}
+
+input {
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+input:read-only, input:disabled {
+  background-color: var(--background-color);
 }
 
 /* Grid styles (no changes required) */
+
 .row {
   width: 100%;
   display: flex;
@@ -104,112 +143,141 @@ label {
   width: calc(100% - 1rem);
 }
 
+
 /* Styles for Header Component */
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  align-content: center;
 
-  padding: 25px;
+  height: 120px;
+  width: 100%;
+  padding: 15px 30px;
 
   background-color: var(--background-color);
   border-bottom: 1px solid var(--border-color);
 }
 
 .header__image {
-  width: 50px;
+  height: 50px;
 }
+
 
 /* Styles for Main Component */
+
 .main {
-  padding: 50px;
+  max-width: 1080px;
+  padding: 30px 50px;
+
 }
+
 
 /* Styles for Tagging component */
+
 .tagging {
-  padding: 0px 15px;
-  max-width: 300px;
+  min-width: 250px;
 }
 
-legend {
-  padding: 0 5px;
-  margin: 0 -5px;
+.tagging fieldset {
+  max-width: 230px;
 }
 
-fieldset {
-  border: 1px solid var(--border-color);
-  border-radius: 2px;
-  padding: 10px;
+/* Styles for Discovery component */
+
+.discovery, .discovery__wrapper {
+  min-width: 410px;
 }
 
-button, input {
-  display: block;
-  
-  height: 32px;
-  width: 200px;
+.discovery__wrapper {
+  display: flex;
+  justify-content: space-between;
 
-  border: 1px solid var(--border-color);
-  border-radius: 2px;
+  width: 100%;
+  padding: 15px 0;
 }
 
-input {
-  padding-left: 5px;
-  margin-bottom: 10px;
-}
-
-input:read-only {
-  background-color: rgba(211, 211, 211, 0.521);
-}
-
-/*Styles for Discovery component */
-.discovery {
-  padding: 0px 15px;
+.discovery__taglist {
+  min-width: 230px;
+  padding-right: 15px;
 }
 
 .discovery__results li {
-  list-style-type: none;
-  background-color: var(--background-color);
-  color: var(--link-color);
   padding: 10px;
-  margin: 15px 0px;
+  margin-bottom: 15px;
+
+  list-style-type: none;
+  
+  color: var(--link-color);
+  background-color: var(--background-color);
   border: 1px solid var(--border-color);
-}
-
-.discovery__taglist{
-  margin: 10px 10px 0px 0px ;
-}
-
-.discovery__map {
-  flex-grow: 2;
-  margin: 25px;
-
 }
 
 #mapView {
   width: 100%;
 }
 
-.discovery__map span {
-  color: gray;
-}
-
-/*Styles for Footer Component */
+/* Styles for Footer Component */
 
 .footer {
   display: flex;
-  justify-content: flex-start;
-  padding: 25px;
-  background-color: #efefef;
-  border-top: 1px solid #cdcdcd;
-  font-weight: bold;
-  margin-top:auto;
-  min-height:100px;
+  align-items: center;
+
+  height: 80px;
+  width: 100%;
+  padding: 15px 30px;
+
+  background-color: var(--background-color);
+  border-top: 1px solid var(--border-color);
 }
 
-/* Media Queries */
-@media only screen and (max-width: 1000px) {
+.footer span {
+  font-weight: bold;
+}
 
+
+/* Media Queries */
+
+/* Styles for Tablet */
+
+@media only screen and (max-width: 850px) {
+  
+  .header {
+    height: 80px;
+    padding: 5px 10px;
+  }
+
+  .header__image {
+    height: 30px;
+  }
+
+  .header__title {
+    font-size: 14pt;
+  }
+
+  .main {
+    padding: 15px 25px;
+  }
+
+  .discovery {
+    min-width: 250px;
+  }
+
+  .discovery__wrapper {
+    flex-direction: column-reverse;
+    min-width: 250px;
+  }
+
+  .discovery__taglist {
+    padding: 15px 0;
+  }
+}
+
+
+/* Styles for Smartphone */
+
+@media only screen and (max-width: 600px) {
+  
   .row {
     flex-direction: column;
   }
@@ -218,6 +286,15 @@ input:read-only {
   .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
     width: 100%;
   }
+  
+  .main {
+    padding: 5px 15px;
+  }
+
+  .tagging fieldset {
+    max-width: none;
+  }
+
 }
 
 @media only print {
