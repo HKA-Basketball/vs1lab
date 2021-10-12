@@ -337,5 +337,14 @@ input:read-only, input:disabled {
 /* Styles for the Print view */
 
 @media only print {
-  /* TODO */
+
+  .header, .footer {
+    height: 80px;
+    padding: 0;
+  }
+
+  .main {
+    max-width: 800px;
+    padding: 0 5px;
+  }
 }
