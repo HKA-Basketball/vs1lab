@@ -297,6 +297,45 @@ input:read-only, input:disabled {
 
 }
 
+
+/* Styles for dark themes */
+
+@media only screen and (prefers-color-scheme: dark) {
+
+  :root {
+    --link-color: #00B7FF;
+    --background-color: #161618;
+    --border-color: #333;
+    --gray-color: #bbb;
+  }
+
+  body {
+    color: whitesmoke;
+    background-color: var(--background-color);
+  }
+
+  button, input {
+    color: whitesmoke;
+    background-color: var(--border-color);
+  }
+
+  input:read-only, input:read-only::placeholder {
+    color: whitesmoke;
+  }
+
+  input::placeholder {
+    color: dimgray;
+  }
+
+  .discovery__taglist li {
+    background-color: var(--border-color);
+  }
+
+}
+
+
+/* Styles for the Print view */
+
 @media only print {
   /* TODO */
 }
