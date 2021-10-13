@@ -57,6 +57,28 @@ class LocationHelper {
             alert(error.message)
         });
     }
+
+    /**
+     * Reading out the position with findLocation.
+     * If successful, latitude and longitude input fields of the tagging form and the discovery form (hidden input fields) 
+     * will be searchend and the coordinates written in their value attributes.
+     */
+    static updateLocation() {
+
+        // Get the current location
+        LocationHelper.findLocation(callback => {
+
+            // Write the current location in the latitude and longtitude fields
+            document.getElementById("latitudeInput").value = callback.latitude;
+            document.getElementById("longitudeInput").value = callback.longitude;
+            document.getElementById("latitudeInputDiscovery").value = callback.latitude;
+            document.getElementById("longitudeInputDiscovery").value = callback.longitude;
+
+            // Generate a MapQuest image URL for the specified parameters and replace the Discovery Image
+            document.getElementById("mapView").src = new MapManager('Grmt99KmIw7IkyWsTmDGvMGXfWFOeSG8')
+                .getMapUrl(callback.latitude, callback.longitude, [], 15);
+        });
+    }
 }
 
 /**
@@ -98,13 +120,10 @@ class MapManager {
 }
 
 /**
- * TODO: 'updateLocation'
  * A function to retrieve the current location and update the page.
  * It is called once the page has been fully loaded.
  */
-// ... your code here ...
-
-// Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-    alert("Please change the script 'geotagging.js'");
+    // Wait for the page to fully load its DOM content, then call updateLocation
+    LocationHelper.updateLocation();
 });
