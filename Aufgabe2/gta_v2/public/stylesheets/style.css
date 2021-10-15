@@ -304,9 +304,10 @@ input:read-only, input:disabled {
 
   :root {
     --link-color: #00B7FF;
-    --background-color: #161618;
-    --border-color: #333;
-    --gray-color: #bbb;
+    --background-color: #252525;
+    --header-footer-color: #151515;
+    --border-color: #444;
+    --gray-color: #aaa;
   }
 
   body {
@@ -325,6 +326,10 @@ input:read-only, input:disabled {
 
   input::placeholder {
     color: dimgray;
+  }
+
+  .header, .footer {
+    background-color: var(--header-footer-color);
   }
 
   .discovery__taglist li {
