@@ -68,7 +68,7 @@ class LocationHelper {
         // Get the current location
         LocationHelper.findLocation(callback => {
 
-            // Write the current location in the latitude and longtitude fields
+            // Write the current location in the latitude and longitude fields
             document.getElementById("latitudeInput").value = callback.latitude;
             document.getElementById("longitudeInput").value = callback.longitude;
             document.getElementById("latitudeInputDiscovery").value = callback.latitude;
