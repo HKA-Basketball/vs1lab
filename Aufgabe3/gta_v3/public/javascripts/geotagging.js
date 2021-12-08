@@ -14,6 +14,15 @@ console.log("The geoTagging script is going to start...");
  * It is called once the page has been fully loaded.
  */
 document.addEventListener("DOMContentLoaded", () => {
-    // Wait for the page to fully load its DOM content, then call updateLocation
-    LocationHelper.updateLocation();
+
+    // Don't update the Location if the values are already retrieved
+    if (!document.getElementById("latitudeInput").value || !document.getElementById("longitudeInput").value
+    || !document.getElementById("latitudeInputDiscovery").value || !document.getElementById("longitudeInputDiscovery").value) {
+
+        // Get the List of GeoTags in the maps data-tags
+        let taglistJson = document.getElementById("mapView").getAttribute("data-tags");
+
+        // Update current location
+        LocationHelper.updateLocation(JSON.parse(taglistJson));
+    }
 });
