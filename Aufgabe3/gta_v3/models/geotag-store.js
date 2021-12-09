@@ -50,12 +50,12 @@ class InMemoryGeoTagStore{
     }
 
     /**
-     * Calculate the distance between to locations
+     * Calculate the distance between two locations in km
      * @param {GeoTag} location1 
      * @param {GeoTag} location2 
      * @returns {number}
      */
-    _distance(location1, location2) {
+    #distance(location1, location2) {
         // TODO
         return 0;
     }
@@ -67,8 +67,8 @@ class InMemoryGeoTagStore{
      */
     getNearbyGeoTags(location) {
 
-        const radius = 100; // radius in Km
-        let nearbyGeoTags = this.#geoTagList.filter(geoTag => this._distance(location, geoTag) <= radius);
+        const radius = 1; // radius in Km
+        let nearbyGeoTags = this.#geoTagList.filter(geoTag => this.#distance(location, geoTag) <= radius);
 
         return nearbyGeoTags;
     }
