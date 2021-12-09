@@ -78,7 +78,7 @@ class LocationHelper {
 
             // Generate a MapQuest image URL for the specified parameters and replace the Discovery Image
             document.getElementById("mapView").src = new MapManager('Grmt99KmIw7IkyWsTmDGvMGXfWFOeSG8')
-                .getMapUrl(callback.latitude, callback.longitude, tags, 8);
+                .getMapUrl(callback.latitude, callback.longitude, tags, 16);
         });
     }
 }
