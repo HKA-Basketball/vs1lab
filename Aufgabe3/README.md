@@ -128,7 +128,7 @@ Zur Übersicht folgen noch mal alle Anforderungen in kompakter Form als Checklis
   - [x] **Klasse für GeoTag Objekte** erstellen (`./model/geotag.js`)
   - [x] **Klasse zur GeoTag Speicherung** erstellen (`./model/geotag-store.js`)
     - [x] Privaten Array nutzen
-    - [ ] Methoden `addGeoTag`, `removeGeoTag`, `getNearbyGeoTags`, `searchNearbyGeoTags` realisieren
+    - [x] Methoden `addGeoTag`, `removeGeoTag`, `getNearbyGeoTags`, `searchNearbyGeoTags` realisieren
   - [x] **Beispieldaten für GeoTag Objekte** einlesen (`./model/geotag-examples.js`)
 
 - [x] **Server Konfiguration und Routen** fertigstellen
