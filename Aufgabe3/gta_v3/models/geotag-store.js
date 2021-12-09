@@ -51,13 +51,26 @@ class InMemoryGeoTagStore{
 
     /**
      * Calculate the distance between two locations in km
+     * Using Haversine formula
      * @param {GeoTag} location1 
      * @param {GeoTag} location2 
      * @returns {number}
      */
     #distance(location1, location2) {
-        // TODO
-        return 0;
+            
+        let radiusEarth = 6371; // Radius of the earth in km
+        let deltaLatitude = (location1.latitude - location2.latitude) * (Math.PI/180);
+        let deltaLongitude = (location1.longitude - location2.longitude) * (Math.PI/180);
+
+        let a = Math.sin(deltaLatitude/2) * Math.sin(deltaLatitude/2) + 
+            Math.cos(location1.latitude * (Math.PI/180)) * 
+            Math.cos(location2.latitude * (Math.PI/180)) * 
+            Math.sin(deltaLongitude/2) * Math.sin(deltaLongitude/2);
+            
+        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        let distance = radiusEarth * c; // Distance in km
+        
+        return distance;
     }
 
     /**
