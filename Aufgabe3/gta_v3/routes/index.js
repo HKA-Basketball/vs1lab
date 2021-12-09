@@ -84,7 +84,7 @@ router.post('/tagging', (req, res) => {
   );
   
   console.log("/tagging");
-  console.log(geoTag);
+  console.log(JSON.stringify(geoTag));
 
   // save new geotag
   geoTagStore.addGeoTag(geoTag);
@@ -121,7 +121,7 @@ router.post('/discovery', (req, res) => {
   );
 
   console.log("/discovery");
-  console.log(geoTag);
+  console.log(JSON.stringify(geoTag));
 
   // show new geotag and surrounding geotags
   res.render('index', { taglist: geoTagStore.searchNearbyGeoTags(geoTag, searchInput, searchInput) })
