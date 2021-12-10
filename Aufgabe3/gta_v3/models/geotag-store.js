@@ -55,7 +55,6 @@ class InMemoryGeoTagStore{
      * but WILL NOT WORK near the poles!
      * @param {GeoTag} location1 
      * @param {GeoTag} location2 
-     * @returns {number}
      */
      #distance(location1, location2) {
 
