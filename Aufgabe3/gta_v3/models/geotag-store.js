@@ -50,27 +50,27 @@ class InMemoryGeoTagStore{
     }
 
     /**
-     * Calculate the distance between two locations in km
-     * Using Haversine formula
+     * Calculate the distance between to locations.
+     * This function will work near the equator 
+     * but WILL NOT WORK near the poles!
      * @param {GeoTag} location1 
      * @param {GeoTag} location2 
      * @returns {number}
      */
-    #distance(location1, location2) {
-            
-        let radiusEarth = 6371; // Radius of the earth in km
-        let deltaLatitude = (location1.latitude - location2.latitude) * (Math.PI/180);
-        let deltaLongitude = (location1.longitude - location2.longitude) * (Math.PI/180);
+     #distance(location1, location2) {
 
-        let a = Math.sin(deltaLatitude/2) * Math.sin(deltaLatitude/2) + 
-            Math.cos(location1.latitude * (Math.PI/180)) * 
-            Math.cos(location2.latitude * (Math.PI/180)) * 
-            Math.sin(deltaLongitude/2) * Math.sin(deltaLongitude/2);
-            
-        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-        let distance = radiusEarth * c; // Distance in km
-        
-        return distance;
+        let p1 = location1.longitude;
+        let p2 = location1.latitude;
+        let q1 = location2.longitude;
+        let q2 = location2.latitude;
+
+        // bare euclidean distance 
+        let distInDeg = Math.sqrt(Math.pow((q1 - p1), 2) + Math.pow((q2 - p2), 2));
+
+        const radius = 1.2; // inKM 
+        const radiusInDeg = (radius / 40075 * 360);
+
+        return distInDeg <= radiusInDeg;
     }
 
     /**
