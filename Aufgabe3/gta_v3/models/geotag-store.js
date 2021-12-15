@@ -78,9 +78,7 @@ class InMemoryGeoTagStore{
      * @returns {GeoTag[]}
      */
     getNearbyGeoTags(location) {
-
-        const radius = 1; // radius in Km
-        let nearbyGeoTags = this.#geoTagList.filter(geoTag => this.#distance(location, geoTag) <= radius);
+        let nearbyGeoTags = this.#geoTagList.filter(geoTag => this.#distance(location, geoTag));
 
         return nearbyGeoTags;
     }
