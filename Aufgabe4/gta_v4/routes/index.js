@@ -128,8 +128,9 @@ router.post('/discovery', (req, res) => {
  * If 'searchterm' is present, it will be filtered by search term.
  * If 'latitude' and 'longitude' are available, it will be further filtered based on radius.
  */
-
-// TODO: ... your code here ...
+router.get('/api/geotags', (req, res) => {
+  // TODO: ... your code here ...
+});
 
 
 /**
@@ -142,8 +143,9 @@ router.post('/discovery', (req, res) => {
  * The URL of the new resource is returned in the header as a response.
  * The new resource is rendered as JSON in the response.
  */
-
-// TODO: ... your code here ...
+router.post('/api/geotags', (req, res) => {
+  // TODO: ... your code here ...
+});
 
 
 /**
@@ -155,8 +157,9 @@ router.post('/discovery', (req, res) => {
  *
  * The requested tag is rendered as JSON in the response.
  */
-
-// TODO: ... your code here ...
+router.get('/api/geotags/:id', (req, res) => {
+  // TODO: ... your code here ...
+});
 
 
 /**
@@ -172,8 +175,9 @@ router.post('/discovery', (req, res) => {
  * Changes the tag with the corresponding ID to the sent value.
  * The updated resource is rendered as JSON in the response. 
  */
-
-// TODO: ... your code here ...
+router.put('/api/geotags/:id', (req, res) => {
+  // TODO: ... your code here ...
+});
 
 
 /**
@@ -186,7 +190,8 @@ router.post('/discovery', (req, res) => {
  * Deletes the tag with the corresponding ID.
  * The deleted resource is rendered as JSON in the response.
  */
-
-// TODO: ... your code here ...
+router.delete('/api/geotags/:id', (req, res) => {
+  // TODO: ... your code here ...
+});
 
 module.exports = router;
