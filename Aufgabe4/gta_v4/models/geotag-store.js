@@ -56,7 +56,7 @@ class InMemoryGeoTagStore{
      * @param {GeoTag} location1 
      * @param {GeoTag} location2 
      */
-     #distance(location1, location2) {
+     distance(location1, location2) {
 
         let p1 = location1.longitude;
         let p2 = location1.latitude;
@@ -78,7 +78,7 @@ class InMemoryGeoTagStore{
      * @returns {GeoTag[]}
      */
     getNearbyGeoTags(location) {
-        let nearbyGeoTags = this.#geoTagList.filter(geoTag => this.#distance(location, geoTag));
+        let nearbyGeoTags = this.#geoTagList.filter(geoTag => this.distance(location, geoTag));
 
         return nearbyGeoTags;
     }
