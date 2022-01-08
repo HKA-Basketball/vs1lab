@@ -1,0 +1,40 @@
+### Suchen Nearby
+
+GET http://localhost:3000/api/geotags/49.20094&8.65224&U HTTP/1.1
+Content-Type: application/json
+
+### Erstellen 
+
+POST http://localhost:3000/api/geotags HTTP/1.1
+Content-Type: application/json
+
+{
+    "latitudeInput":18.1315,
+    "longitudeInput":13.1323,
+    "nameInput":"newGeoTag",
+    "hashtagInput":"#campus42"
+} 
+
+### Suchen by ID
+
+GET http://localhost:3000/api/geotags/19 HTTP/1.1
+Content-Type: application/json
+
+### Edit by ID
+
+PUT http://localhost:3000/api/geotags/19 HTTP/1.1
+Content-Type: application/json
+
+{
+    "latitudeInput":21.1315,
+    "longitudeInput":43.1323,
+    "nameInput":"",
+    "hashtagInput":""
+} 
+
+### Loeschen by ID
+
+DELETE http://localhost:3000/api/geotags/19 HTTP/1.1
+Content-Type: application/json
+
+###

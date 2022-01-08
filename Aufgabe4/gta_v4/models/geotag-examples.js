@@ -35,6 +35,9 @@ class GeoTagExamples {
             ['Noch ein punkt', 49.00100, 8.47390, '#campus'],
             ['P1', 44.794457, 9.518599, '#campus'],
             ['Nigeria',21.670110638322967, 11.8698258745779,'#campus'],
+            ['Unikum', 49.20204, 8.65224,'#campus'],
+            ['Unikum2', 49.20094, 8.65524,'#campus'],
+            ['Unikum3', 49.20034, 8.65424,'#campus'],
         ];
     }
 
