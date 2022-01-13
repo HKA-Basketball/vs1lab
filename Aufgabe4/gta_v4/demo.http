@@ -34,7 +34,12 @@ Content-Type: application/json
 
 ### Loeschen by ID
 
-DELETE http://localhost:3000/api/geotags/19 HTTP/1.1
+DELETE http://localhost:3000/api/geotags/18 HTTP/1.1
+Content-Type: application/json
+
+### Get GeoTags on Page
+
+GET http://localhost:3000/api/geotags/page/1&&& HTTP/1.1
 Content-Type: application/json
 
 ###

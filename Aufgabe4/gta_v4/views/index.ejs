@@ -70,6 +70,9 @@
                     <input type="hidden" id="latitudeInputDiscovery" name="latitudeInput" />
                     <input type="hidden" id="longitudeInputDiscovery" name="longitudeInput" />
                     <button id="discoveryButton">Search</button>
+                    <div class="discoveryButtonInfo">                        
+                        <div id="discoveryButtonWasPressed">0</div>
+                    </div>
                 </fieldset>
 
             </form>
@@ -77,10 +80,18 @@
             <div class="discovery__wrapper">
                 <div class="discovery__taglist">
                     <ul class="discovery__results" id="discoveryResults">
-                        <% if (taglist !== undefined) taglist.forEach(function(gtag) { %>
-                            <li><%= gtag.name %> (<%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.hashtag %> </li>
-                        <% }); %>
-                    </ul>
+                        <% if (taglist !== undefined) /*taglist.forEach(function(gtag) {*/ for (let i = 0; i < maxGeoTagsOnPage; i++) { %>
+                            <li><%= taglist[i].name %> (<%= taglist[i].latitude %>,<%= taglist[i].longitude %>) <%= taglist[i].hashtag %> </li>
+                        <% }; %>
+                    </ul>   
+                    
+                    <div class="pageInfos">
+                        <button id="privPage"><</button>
+                        <ul id="pageInfos">
+                            <div id="curPage"><%= pagePos %></div>/<div id="lastPage"><%= lastPageNum %></div> (<div id="arrGeoTagSize"><%= arrGeoTagSize %></div>)
+                        </ul>
+                        <button id="nextPage">></button>
+                    </div>
                 </div>
 
                 <div class="discovery__map">

@@ -202,6 +202,27 @@ input:read-only, input:disabled {
   padding-right: 15px;
 }
 
+.pageInfos {
+  display:inline;
+}
+
+.pageInfos button {
+  display:inline;
+  width: fit-content;
+}
+
+.pageInfos ul {
+  display:inline;
+}
+
+.pageInfos div {
+  display:inline;
+}
+
+.discoveryButtonInfo {
+  display:none;
+}
+
 .discovery__results li {
   padding: 10px;
   margin-bottom: 15px;

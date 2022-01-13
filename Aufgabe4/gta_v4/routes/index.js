@@ -41,7 +41,7 @@ const GeoTagExamples = require('../models/geotag-examples');
  */
 
 router.get('/', (req, res) => {
-  res.render('index', { taglist: geoTagStore.showGeoTags() })
+  res.render('index', { taglist: geoTagStore.showGeoTags(), maxGeoTagsOnPage: 5, pagePos: 1, lastPageNum:geoTagStore.getMaxPages(), arrGeoTagSize: geoTagStore.showGeoTags().length })
 });
 
 /**
@@ -205,18 +205,6 @@ router.use(express.urlencoded({ extended: true })) // for parsing application/x-
  router.put('/api/geotags/:id', (req, res) => {
   console.log("put :id");
   const {latitudeInput, longitudeInput, nameInput, hashtagInput} = req.body;
-
-  /*
-    PUT http://localhost:3000/api/geotags/:id HTTP/1.1
-    Content-Type: application/json
-
-    {
-        "latitudeInput":X.XXXXX,
-        "longitudeInput":X.XXXXX,
-        "nameInput":"XXXX",
-        "hashtagInput":"#XXXXXXXX"
-    }  
-  */
  
   const newGeoTagData = new GeoTag(
     parseFloat(latitudeInput),
@@ -242,6 +230,23 @@ router.use(express.urlencoded({ extended: true })) // for parsing application/x-
  router.delete('/api/geotags/:id', (req, res) => {
   console.log("delete :id");
   res.json(geoTagStore.deletGeoTagByID(req.params.id));
+});
+
+router.get('/api/geotags/page/:pageInput&:latitudeInput?&:longitudeInput?&:searchInput?', (req, res) => {
+  // show geotags on requested page
+  console.log("get :page");
+  const {pageInput, latitudeInput, longitudeInput, searchInput} = req.params;
+ 
+  const geoTagData = {
+    latitude:latitudeInput,
+    longitude:longitudeInput,
+    name:searchInput,
+    hashtag:searchInput
+  }
+
+  //console.log(geoTagData);
+
+  res.json(geoTagStore.getListByPage(pageInput, geoTagData));
 });
 
 module.exports = router;

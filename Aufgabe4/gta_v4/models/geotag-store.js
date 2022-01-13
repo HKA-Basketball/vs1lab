@@ -44,6 +44,16 @@ class InMemoryGeoTagStore{
     }
 
     /**
+     * Returns geotags on Page X
+     * @param {page} pageNum
+     * @returns {GeoTag[]}
+     */
+    showGeoTagsByPageNum(pageNum)
+    {
+        return this.getListByPage(pageNum).map(x => x.GeoTag);
+    }
+
+    /**
      * Add a geotag
      * @param {GeoTag} geoTag 
      */
@@ -171,23 +181,6 @@ class InMemoryGeoTagStore{
         return deletedGeoTag;
     }
 
-    /*
-    [
-        {
-            id:11,
-            GeoTag:
-            {
-                ....
-            }
-        },
-
-
-
-    ]
-    
-    
-    */
-
     /**
      * Returns geotag with edited values
      * @param {id} primarykey
@@ -202,12 +195,12 @@ class InMemoryGeoTagStore{
         let newName = '';
         let newHashtag = '';
 
-        if (newData.latitude !== 0.0)
+        if (newData.latitude)
             newLatitude = newData.latitude;
         else
             newLatitude = geotag.latitude;
 
-        if (newData.longitude !== 0.0)
+        if (newData.longitude)
             newLongitude = newData.longitude;
         else
             newLongitude = geotag.longitude;
@@ -235,6 +228,40 @@ class InMemoryGeoTagStore{
         this.#geoTagList[getIndex].GeoTag = newGeoTagData;
 
         return this.#geoTagList[getIndex];
+    }
+
+    /**
+     * Returns maxPages
+     * @param {maxGeotagsPerPage} maxGeotags
+     * @returns {maxPages}
+    */
+    getMaxPages(maxGeotags = 5)
+    {
+        return Math.ceil(this.#geoTagList.length / maxGeotags);
+    }
+
+    /**
+     * Returns geotags on Page X
+     * @param {page} pageNum
+     * @param {GeoTag} myGeoTag
+     * @param {maxGeotagsPerPage} maxGeotags
+     * @returns {GeoTag[]}
+     */
+    getListByPage(pageNum, myGeoTag, maxGeotags = 5)
+    {
+        let nearbyGeoTags = this.#geoTagList;
+        if (myGeoTag && myGeoTag.latitude && myGeoTag.longitude)
+        {
+            nearbyGeoTags = this.searchNearbyGeoTags(myGeoTag, myGeoTag.name, myGeoTag.hashtag);
+        }
+
+        let maxPages = Math.ceil(nearbyGeoTags.length / maxGeotags);
+        console.log("Max Pages: " + maxPages);
+
+        let firstPosOnPage = (pageNum - 1) * maxGeotags;
+        let lastPosOnPage = firstPosOnPage + maxGeotags;
+
+        return nearbyGeoTags.slice(firstPosOnPage, lastPosOnPage);
     }
 }
 

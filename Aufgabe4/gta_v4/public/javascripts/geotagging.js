@@ -21,9 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Get the List of GeoTags in the maps data-tags
         let taglistJson = document.getElementById("mapView").getAttribute("data-tags");
+        taglistJson = JSON.parse(taglistJson).slice(0, 5);
+        //console.log(taglistJson);
 
         // Update current location
-        LocationHelper.updateLocation(JSON.parse(taglistJson));
+        LocationHelper.updateLocation(taglistJson);
     }
 });
 
@@ -53,12 +55,44 @@ document.getElementById("taggingButton").addEventListener("click", () => {
             let mapview = document.getElementById("mapView");
 
             let taglist = JSON.parse(mapview.getAttribute("data-tags"));
-            taglist.push(geoTagMap.GeoTag);
+            let arrGeoTagSize = parseInt(document.getElementById("arrGeoTagSize").textContent);
+
+            if (parseInt(document.getElementById("discoveryButtonWasPressed").textContent) == 1)
+            {
+                //Überhaupt nötig?!?! da man über die web site ja e nur seinen aktuellen standort adden kann
+                //document.getElementById("latitudeInput").value;
+                //document.getElementById("longitudeInput").value
+
+                let searchVal = document.getElementById("searchInput").value;
+                if (geoTagMap.GeoTag.name.includes(searchVal) || geoTagMap.GeoTag.hashtag.includes(searchVal))
+                {
+                    taglist.push(geoTagMap.GeoTag);
+                    arrGeoTagSize++;
+                }
+            }
+            else
+            {
+                taglist.push(geoTagMap.GeoTag);
+                arrGeoTagSize++;
+            }
+
             mapview.setAttribute("data-tags", JSON.stringify(taglist));
 
-            updateView(taglist)
-        });
+            let maxGeotags = 5;
+            let lastPageNum = Math.ceil(arrGeoTagSize / maxGeotags);
+            console.log("Max Pages: " + lastPageNum);
 
+            let currentPage = parseInt(document.getElementById("curPage").textContent);
+
+            let htmlPageInfos = `<div id="curPage">${currentPage}</div>/<div id="lastPage">${lastPageNum}</div> (<div id="arrGeoTagSize">${arrGeoTagSize}</div>)`;
+
+            document.getElementById('pageInfos').innerHTML = htmlPageInfos;
+
+            let firstPosOnPage = (currentPage - 1) * maxGeotags;
+            let lastPosOnPage = firstPosOnPage + maxGeotags;
+
+            updateView(taglist.slice(firstPosOnPage, lastPosOnPage))
+        });
 });
 
 
@@ -77,11 +111,120 @@ document.getElementById("discoveryButton").addEventListener("click", () => {
     fetch(url, fetchData)
         .then(response => response.json())
         .then(geoTagsMap => {
-            let geoTags = geoTagsMap.map(x => x.GeoTag)
-            document.getElementById("mapView").setAttribute("data-tags", JSON.stringify(geoTags));
-            updateView(geoTags)});
-        });
+            let geoTags = geoTagsMap.map(x => x.GeoTag);
 
+            let maxGeotags = 5;
+            let arrGeoTagSize = geoTags.length;
+            let lastPageNum = Math.ceil(arrGeoTagSize / maxGeotags);
+            console.log("Max Pages: " + lastPageNum);
+
+            let newPageNum = 1;
+
+            let htmlPageInfos = `<div id="curPage">${newPageNum}</div>/<div id="lastPage">${lastPageNum}</div> (<div id="arrGeoTagSize">${arrGeoTagSize}</div>)`;
+
+            document.getElementById('pageInfos').innerHTML = htmlPageInfos;
+
+            document.getElementById("mapView").setAttribute("data-tags", JSON.stringify(geoTags));
+
+            let firstPosOnPage = (newPageNum - 1) * maxGeotags;
+            let lastPosOnPage = firstPosOnPage + maxGeotags;
+            
+            document.getElementById("discoveryButtonWasPressed").innerHTML = "1";
+
+            updateView(geoTags.slice(firstPosOnPage, lastPosOnPage))
+        });
+});
+
+document.getElementById("nextPage").addEventListener("click", () => {
+    console.log("nextPage");
+    
+    let lastPageNum = parseInt(document.getElementById("lastPage").textContent);
+    let arrGeoTagSize = parseInt(document.getElementById("arrGeoTagSize").textContent);
+    let newPageNum = parseInt(document.getElementById("curPage").textContent);
+
+    if (newPageNum < lastPageNum)
+        newPageNum += 1;
+    else
+        return;
+
+    console.log(newPageNum);
+    
+    let url = `/api/geotags/page/`;
+    url += `${newPageNum}&` || '&';
+    if (parseInt(document.getElementById("discoveryButtonWasPressed").textContent) == 1)
+    {
+        url += `${document.getElementById("latitudeInput").value}&` || '&';
+        url += `${document.getElementById("longitudeInput").value}&` || '&';
+        url += `${document.getElementById("searchInput").value}` || '';
+    }
+    else
+        url += '&&';
+
+    
+    console.log(url);
+
+    let fetchData = {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" }
+    }
+
+    fetch(url, fetchData)
+        .then(response => response.json())
+        .then(geoTagsMap => {
+            let geoTags = geoTagsMap.map(x => x.GeoTag)
+
+            updateView(geoTags);
+
+            let htmlPageInfos = `<div id="curPage">${newPageNum}</div>/<div id="lastPage">${lastPageNum}</div> (<div id="arrGeoTagSize">${arrGeoTagSize}</div>)`;
+
+            document.getElementById('pageInfos').innerHTML = htmlPageInfos;
+        });
+});
+
+document.getElementById("privPage").addEventListener("click", () => {
+    console.log("privPage");
+    
+    let lastPageNum = parseInt(document.getElementById("lastPage").textContent);
+    let arrGeoTagSize = parseInt(document.getElementById("arrGeoTagSize").textContent);
+    let newPageNum = parseInt(document.getElementById("curPage").textContent);
+
+    if (newPageNum > 1)
+        newPageNum -= 1;
+    else
+        return;
+
+    console.log(newPageNum);
+    
+    let url = `/api/geotags/page/`;
+    url += `${newPageNum}&` || '&';
+    if (parseInt(document.getElementById("discoveryButtonWasPressed").textContent) == 1)
+    {
+        url += `${document.getElementById("latitudeInput").value}&` || '&';
+        url += `${document.getElementById("longitudeInput").value}&` || '&';
+        url += `${document.getElementById("searchInput").value}` || '';
+    }
+    else
+        url += '&&';
+
+    console.log(url);
+
+    let fetchData = {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" }
+    }
+
+    fetch(url, fetchData)
+        .then(response => response.json())
+        .then(geoTagsMap => {
+            let geoTags = geoTagsMap.map(x => x.GeoTag)
+            
+            updateView(geoTags);
+
+            let htmlPageInfos = `<div id="curPage">${newPageNum}</div>/<div id="lastPage">${lastPageNum}</div> (<div id="arrGeoTagSize">${arrGeoTagSize}</div>)`;
+
+            document.getElementById('pageInfos').innerHTML = htmlPageInfos;
+        });
+});
 
 function updateView(newList = []) {
     let htmllist = newList.map(function (gTag) { return `<li>${gTag.name} (${gTag.latitude},${gTag.longitude}) ${gTag.hashtag} </li>` })
